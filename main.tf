@@ -1,11 +1,7 @@
-data "aws_ami" "app_ami" {
+data "aws_ami" "ubuntu" {
   most_recent = true
 
-  filter {
-    name   = "name"
-    values = ["Amazon Linux 2023 kernel-6.18 AMI"]
-  }
-
+  
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
@@ -15,7 +11,7 @@ data "aws_ami" "app_ami" {
 }
 
 resource "aws_instance" "web" {
-  ami           = data.aws_ami.app_ami.id
+  ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
 
   tags = {
